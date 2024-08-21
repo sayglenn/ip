@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Ginger {
@@ -13,9 +14,13 @@ public class Ginger {
         System.out.println(HORIZONTAL_LINE);
 
         String input = sc.nextLine();
-        System.out.println(HORIZONTAL_LINE + "\n" + input + "\n" + HORIZONTAL_LINE);
+        while (!input.equals("bye")) {
+            System.out.println(HORIZONTAL_LINE + "\n" + input + "\n" + HORIZONTAL_LINE);
+            input = sc.nextLine();
+        }
         sc.close();
 
+        System.out.println(HORIZONTAL_LINE);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(HORIZONTAL_LINE);
     }
