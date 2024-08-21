@@ -7,7 +7,7 @@ public class Ginger {
 
     private final static ArrayList<String> taskList = new ArrayList<>();
 
-    private String retrieveTasks() {
+    private static String retrieveTasks() {
         String result = "";
 
         for (int i = 0; i < taskList.size(); i++) {
@@ -26,15 +26,28 @@ public class Ginger {
         System.out.println("What can I do for you?");
         System.out.println(HORIZONTAL_LINE);
 
-        String input = sc.nextLine();
-        while (!input.equals("bye")) {
-            System.out.println(HORIZONTAL_LINE + "\n" + input + "\n" + HORIZONTAL_LINE);
+        String input;
+        while (true) {
             input = sc.nextLine();
+            switch (input) {
+                case "bye":
+                    System.out.println(HORIZONTAL_LINE);
+                    System.out.println("Bye. Hope to see you again soon!");
+                    System.out.println(HORIZONTAL_LINE);
+                    sc.close();
+                    return;
+                case "list":
+                    System.out.println(HORIZONTAL_LINE);
+                    System.out.print(retrieveTasks());
+                    System.out.println(HORIZONTAL_LINE);
+                    break;
+                default:
+                    System.out.println(HORIZONTAL_LINE);
+                    System.out.println("added: " + input);
+                    System.out.println(HORIZONTAL_LINE);
+                    taskList.add(input);
+                    break;
+            }
         }
-        sc.close();
-
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(HORIZONTAL_LINE);
     }
 }
