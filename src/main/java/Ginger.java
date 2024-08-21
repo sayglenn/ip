@@ -1,9 +1,22 @@
-import java.util.Objects;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ginger {
     private final static String HORIZONTAL_LINE = "____________________________________________________________";
     private final static String BOT_NAME = "Ginger";
+
+    private final static ArrayList<String> taskList = new ArrayList<>();
+
+    private String retrieveTasks() {
+        String result = "";
+
+        for (int i = 0; i < taskList.size(); i++) {
+            result += (i + 1) + ". " + taskList.get(i) + "\n";
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
