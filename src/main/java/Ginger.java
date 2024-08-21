@@ -4,8 +4,7 @@ import java.util.Scanner;
 public class Ginger {
     private final static String HORIZONTAL_LINE = "____________________________________________________________";
     private final static String BOT_NAME = "Ginger";
-
-    private final static ArrayList<String> taskList = new ArrayList<>();
+    private final static ArrayList<Task> taskList = new ArrayList<>();
 
     private static String retrieveTasks() {
         String result = "";
@@ -45,7 +44,7 @@ public class Ginger {
                     System.out.println(HORIZONTAL_LINE);
                     System.out.println("added: " + input);
                     System.out.println(HORIZONTAL_LINE);
-                    taskList.add(input);
+                    taskList.add(new Task(input));
                     break;
             }
         }
