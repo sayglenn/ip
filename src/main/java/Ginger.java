@@ -27,6 +27,10 @@ public class Ginger {
         if (input.startsWith("mark")) {
             try {
                 int index = Integer.parseInt(input.substring(5)) - 1;
+                if (index > taskList.size() - 1) {
+                    message(String.format("There is no task numbered %d! Please try again.", index + 1));
+                    return;
+                }
                 Task t = taskList.get(index);
                 t.markAsComplete();
                 message("Nice! I've marked this task as done:\n" + t);
@@ -37,6 +41,10 @@ public class Ginger {
         } else if (input.startsWith("unmark")) {
             try {
                 int index = Integer.parseInt(input.substring(7)) - 1;
+                if (index > taskList.size() - 1) {
+                    message(String.format("There is no task numbered %d! Please try again.", index + 1));
+                    return;
+                }
                 Task t = taskList.get(index);
                 t.markAsIncomplete();
                 message("OK, I've marked this task as not done yet:\n" + t);
