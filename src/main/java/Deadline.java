@@ -7,7 +7,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String[] deadlineParts = this.deadline.split(" ", 2);
-        return String.format("[D]%s (%s: %s)", super.toString(), deadlineParts[0].trim(), deadlineParts[1].trim());
+        return String.format("[D]%s (by: %s)", super.toString(), this.deadline);
     }
 }
