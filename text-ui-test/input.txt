@@ -13,5 +13,9 @@ event dinner /from 6pm /to 7pm
 event lunch / from 12pm / to 1pm
 event breakfast
 list
+delete 1
+delete 12
+delete -1
+list
 help
 bye

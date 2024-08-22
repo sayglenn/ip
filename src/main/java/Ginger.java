@@ -17,7 +17,7 @@ public class Ginger {
     private final static ArrayList<Task> taskList = new ArrayList<>();
 
     enum Command {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, HELP;
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, HELP, DELETE;
 
         public static Command getCommand(String command) throws IllegalGingerCommandException {
             try {
@@ -123,6 +123,26 @@ public class Ginger {
                 newEvent, taskList.size()));
     }
 
+    private static void deleteTask(String input) throws IllegalGingerArgumentException {
+        try {
+            int index = Integer.parseInt(input) - 1;
+            int taskCount = taskList.size();
+            if (index < 0) {
+                message("You entered a non-positive task number! Try again!");
+                return;
+            }
+            if (index > taskCount - 1) {
+                message(String.format("You only have %d tasks! Try again!", taskCount));
+                return;
+            }
+            Task t = taskList.remove(index);
+            message(String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list",
+                    t, taskCount - 1));
+        } catch (NumberFormatException e) {
+            throw new IllegalGingerArgumentException("Oh no! Please enter a proper task number, e.g. delete 1");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -182,6 +202,14 @@ public class Ginger {
                             break;
                         }
                         addEvent(inputParts[1].trim());
+                        break;
+                    case DELETE:
+                        if (inputParts.length < 2) {
+                            message("Oh no! There are insufficient arguments\n" +
+                                    "e.g. delete <arguments>");
+                            break;
+                        }
+                        deleteTask(inputParts[1].trim());
                         break;
                     case HELP:
                         message(helpMessage);
