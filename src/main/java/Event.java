@@ -9,6 +9,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (%s: %s %s: %s", super.toString(), start[0], start[1], end[0], end[1]);
+        return String.format("[E]%s (%s: %s %s: %s", super.toString(),
+                start[0].trim(), start[1].trim(), end[0].trim(), end[1].trim());
     }
 }

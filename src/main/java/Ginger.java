@@ -25,36 +25,42 @@ public class Ginger {
 
     private static void inputProcessor(String input) {
         if (input.startsWith("mark")) {
-            try {
-                int index = Integer.parseInt(input.substring(5)) - 1;
-                if (index > taskList.size() - 1) {
-                    message(String.format("There is no task numbered %d! Please try again.", index + 1));
-                    return;
-                }
-                Task t = taskList.get(index);
-                t.updateStatus(true);
-                message("Nice! I've marked this task as done:\n" + t);
-            } catch (NumberFormatException e) {
-                taskList.add(new Task(input));
-                message("added: " + input);
+            int index = Integer.parseInt(input.substring(5)) - 1;
+            if (index > taskList.size() - 1 || index < 0) {
+                message(String.format("There is no task numbered %d! Please try again.", index + 1));
+                return;
             }
+            Task t = taskList.get(index);
+            t.updateStatus(true);
+            message("Nice! I've marked this task as done:\n" + t);
         } else if (input.startsWith("unmark")) {
-            try {
-                int index = Integer.parseInt(input.substring(7)) - 1;
-                if (index > taskList.size() - 1) {
-                    message(String.format("There is no task numbered %d! Please try again.", index + 1));
-                    return;
-                }
-                Task t = taskList.get(index);
-                t.updateStatus(false);
-                message("OK, I've marked this task as not done yet:\n" + t);
-            } catch (NumberFormatException e) {
-                taskList.add(new Task(input));
-                message("added: " + input);
+            int index = Integer.parseInt(input.substring(7)) - 1;
+            if (index > taskList.size() - 1) {
+                message(String.format("There is no task numbered %d! Please try again.", index + 1));
+                return;
             }
-        } else {
-            taskList.add(new Task(input));
-            message("added: " + input);
+            Task t = taskList.get(index);
+            t.updateStatus(false);
+            message("OK, I've marked this task as not done yet:\n" + t);
+        } else if (input.startsWith("todo")) {
+            ToDo newToDo = new ToDo(input.split(" ", 2)[1].trim());
+            taskList.add(newToDo);
+            message(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                    newToDo, taskList.size()));
+        } else if (input.startsWith("deadline")) {
+            String[] parts = input.split("/", 2);
+            Deadline newDeadline = new Deadline(parts[0].split(" ", 2)[1].trim(),
+                    parts[1].split(" ", 2));
+            taskList.add(newDeadline);
+            message(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                    newDeadline, taskList.size()));
+        } else if (input.startsWith("event")) {
+            String[] parts = input.split("/", 3);
+            Event newEvent = new Event(parts[0].split(" ", 2)[1].trim(),
+                    parts[1].split(" ", 2), parts[2].split(" ", 2));
+            taskList.add(newEvent);
+            message(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                    newEvent, taskList.size()));
         }
     }
 
