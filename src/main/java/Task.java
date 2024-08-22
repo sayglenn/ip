@@ -25,6 +25,6 @@ public class Task {
     public String toString() {
         return isCompleted
                 ? "[X] " + this.title
-                : "[ ]" + this.title;
+                : "[ ] " + this.title;
     }
 }

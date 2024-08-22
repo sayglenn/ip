@@ -6,45 +6,69 @@ public class Ginger {
     private final static String BOT_NAME = "Ginger";
     private final static ArrayList<Task> taskList = new ArrayList<>();
 
+    private static void message(String message) {
+        System.out.println(HORIZONTAL_LINE + "\n" + message + "\n" + HORIZONTAL_LINE);
+    }
+
     private static String retrieveTasks() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
 
         for (int i = 0; i < taskList.size(); i++) {
-            result += (i + 1) + ". " + taskList.get(i) + "\n";
+            result.append(String.format("%d. %s", i + 1, taskList.get(i)));
+            if (i != taskList.size() - 1) {
+                result.append("\n");
+            }
         }
 
-        return result;
+        return result.toString();
+    }
+
+    private static void inputProcessor(String input) {
+        if (input.startsWith("mark")) {
+            try {
+                int index = Integer.parseInt(input.substring(5)) - 1;
+                Task t = taskList.get(index);
+                t.markAsComplete();
+                message("Nice! I've marked this task as done:\n" + t);
+            } catch (NumberFormatException e) {
+                taskList.add(new Task(input));
+                message("added: " + input);
+            }
+        } else if (input.startsWith("unmark")) {
+            try {
+                int index = Integer.parseInt(input.substring(7)) - 1;
+                Task t = taskList.get(index);
+                t.markAsIncomplete();
+                message("OK, I've marked this task as not done yet:\n" + t);
+            } catch (NumberFormatException e) {
+                taskList.add(new Task(input));
+                message("added: " + input);
+            }
+        } else {
+            taskList.add(new Task(input));
+            message("added: " + input);
+        }
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         // Greet the user
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("Hello! I'm " + BOT_NAME);
-        System.out.println("What can I do for you?");
-        System.out.println(HORIZONTAL_LINE);
+        message(String.format("Hello! I'm %s\nWhat can I do for you?", BOT_NAME));
 
         String input;
         while (true) {
             input = sc.nextLine();
             switch (input) {
                 case "bye":
-                    System.out.println(HORIZONTAL_LINE);
-                    System.out.println("Bye. Hope to see you again soon!");
-                    System.out.println(HORIZONTAL_LINE);
+                    message("Bye. Hope to see you again soon!");
                     sc.close();
                     return;
                 case "list":
-                    System.out.println(HORIZONTAL_LINE);
-                    System.out.print(retrieveTasks());
-                    System.out.println(HORIZONTAL_LINE);
+                    message(retrieveTasks());
                     break;
                 default:
-                    System.out.println(HORIZONTAL_LINE);
-                    System.out.println("added: " + input);
-                    System.out.println(HORIZONTAL_LINE);
-                    taskList.add(new Task(input));
+                    inputProcessor(input);
                     break;
             }
         }
