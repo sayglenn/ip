@@ -57,6 +57,7 @@ public class Ginger {
             int taskCount = taskList.size();
             if (index < 0) {
                 message("You entered a non-positive task number! Try again!");
+                return;
             }
             if (index > taskCount - 1) {
                 message(String.format("You only have %d tasks! Try again!", taskCount));
@@ -102,8 +103,14 @@ public class Ginger {
 
     private static void addEvent(String input) throws IllegalGingerArgumentException {
         String[] eventParts = input.split("/from", 2);
+        if (eventParts.length < 2) {
+            throw new IllegalGingerArgumentException(
+                    "Oh no! Please follow the format for the Event: event <title> /from <time> /to <time>" +
+                            "\ne.g. event dinner /from 6pm /to 10pm"
+            );
+        }
         String[] timeParts = eventParts[1].split("/to", 2);
-        if (eventParts.length + timeParts.length < 4) {
+        if (timeParts.length < 2) {
             throw new IllegalGingerArgumentException(
                     "Oh no! Please follow the format for the Event: event <title> /from <time> /to <time>" +
                             "\ne.g. event dinner /from 6pm /to 10pm"
@@ -137,18 +144,43 @@ public class Ginger {
                         message(retrieveTasks());
                         break;
                     case MARK:
+                        if (inputParts.length < 2) {
+                            message("Oh no! There are insufficient arguments\n" +
+                                    "e.g. mark <arguments>");
+                            break;
+                        }
                         changeTaskStatus(inputParts[1].trim(), true);
                         break;
                     case UNMARK:
+                        if (inputParts.length < 2) {
+                            message("Oh no! There are insufficient arguments\n" +
+                                    "e.g. unmark <arguments>");
+                            break;
+                        }
                         changeTaskStatus(inputParts[1].trim(), false);
                         break;
                     case TODO:
+                        if (inputParts.length < 2) {
+                            message("Oh no! There are insufficient arguments\n" +
+                                    "e.g. todo <arguments>");
+                            break;
+                        }
                         addToDo(inputParts[1].trim());
                         break;
                     case DEADLINE:
+                        if (inputParts.length < 2) {
+                            message("Oh no! There are insufficient arguments\n" +
+                                    "e.g. deadline <arguments>");
+                            break;
+                        }
                         addDeadline(inputParts[1].trim());
                         break;
                     case EVENT:
+                        if (inputParts.length < 2) {
+                            message("Oh no! There are insufficient arguments\n" +
+                                    "e.g. event <arguments>");
+                            break;
+                        }
                         addEvent(inputParts[1].trim());
                         break;
                     case HELP:

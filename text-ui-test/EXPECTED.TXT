@@ -8,13 +8,41 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+Oh no! There are insufficient arguments
+e.g. todo <arguments>
+____________________________________________________________
+____________________________________________________________
 Got it. I've added this task:
   [D][ ] practice paper (by: 9pm)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+Oh no! Please follow the format for the Deadline: deadline <title> /by <time>
+e.g. deadline submit work /by 8pm
+____________________________________________________________
+____________________________________________________________
+Oh no! Please follow the format for the Deadline: deadline <title> /by <time>
+e.g. deadline submit work /by 8pm
+____________________________________________________________
+____________________________________________________________
 Nice! I've marked this task as done:
   [T][X] buy food
+____________________________________________________________
+____________________________________________________________
+You only have 2 tasks! Try again!
+____________________________________________________________
+____________________________________________________________
+You entered a non-positive task number! Try again!
+____________________________________________________________
+____________________________________________________________
+OK, I've marked this task as not done yet:
+  [T][ ] buy food
+____________________________________________________________
+____________________________________________________________
+You only have 2 tasks! Try again!
+____________________________________________________________
+____________________________________________________________
+You entered a non-positive task number! Try again!
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
@@ -22,14 +50,28 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-1. [T][X] buy food
+Oh no! Please follow the format for the Event: event <title> /from <time> /to <time>
+e.g. event dinner /from 6pm /to 10pm
+____________________________________________________________
+____________________________________________________________
+Oh no! Please follow the format for the Event: event <title> /from <time> /to <time>
+e.g. event dinner /from 6pm /to 10pm
+____________________________________________________________
+____________________________________________________________
+1. [T][ ] buy food
 2. [D][ ] practice paper (by: 9pm)
 3. [E][ ] dinner (from: 6pm to: 7pm)
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
-  [T][ ] complete project
-Now you have 4 tasks in the list.
+Here is a list of commands to get you started:
+bye - Exits the Ginger chatbot.
+list - Lists the current tasks.
+mark - Marks a task as complete. Usage: mark <task number>
+unmark - Marks a task as incomplete. Usage: unmark <task number>
+todo - Adds a To Do task. Usage: todo <title>
+deadline - Adds a Deadline task which includes a deadline. Usage: deadline <title> /by <time>
+event - Adds an Event task which has start and end time. Usage: event <title> /from <time> /to <time>
+help - Displays this set of information again.
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
