@@ -1,0 +1,7 @@
+todo buy food
+deadline practice paper /by 9pm
+mark 1
+event dinner /from 6pm /to 7pm
+list
+todo complete project
+bye
