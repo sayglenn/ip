@@ -32,7 +32,7 @@ public class Ginger {
                     return;
                 }
                 Task t = taskList.get(index);
-                t.markAsComplete();
+                t.updateStatus(true);
                 message("Nice! I've marked this task as done:\n" + t);
             } catch (NumberFormatException e) {
                 taskList.add(new Task(input));
@@ -46,7 +46,7 @@ public class Ginger {
                     return;
                 }
                 Task t = taskList.get(index);
-                t.markAsIncomplete();
+                t.updateStatus(false);
                 message("OK, I've marked this task as not done yet:\n" + t);
             } catch (NumberFormatException e) {
                 taskList.add(new Task(input));

@@ -8,17 +8,11 @@ public class Task {
     }
 
     /**
-     * Marks the task as complete.
+     * Marks the task as complete or incomplete based on the given status.
+     * @param status A boolean to indicate task completion status.
      */
-    public void markAsComplete() {
-        this.isCompleted = true;
-    }
-
-    /**
-     * Marks the task as incomplete.
-     */
-    public void markAsIncomplete() {
-        this.isCompleted = false;
+    public void updateStatus(boolean status) {
+        this.isCompleted = status;
     }
 
     @Override
