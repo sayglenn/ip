@@ -1,5 +1,9 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Ginger {
@@ -149,6 +153,39 @@ public class Ginger {
         // Greet the user
         message(String.format("Hello! I'm %s\nHow can I spice things up for you?", BOT_NAME));
 
+        File taskFile = new File("tasks.txt");
+
+        if (!taskFile.exists()) {
+            try {
+                message("No database found! Ginger will create one now.");
+                taskFile.createNewFile();
+                message("Database created!");
+            } catch (IOException e) {
+                message(e.getMessage());
+            }
+        }
+
+
+        try {
+            Scanner dbScanner = new Scanner(taskFile);
+            while (dbScanner.hasNextLine()) {
+                String line = dbScanner.nextLine();
+                String[] parts = line.split("\\|");
+                if (parts[0].trim().equals("T")) {
+                    taskList.add(new ToDo(parts[2].trim(), parts[1].trim().equals("1")));
+                } else if (parts[0].trim().equals("D")) {
+                    taskList.add(new Deadline(parts[2].trim(), parts[3].trim(), parts[1].trim().equals("1")));
+                } else {
+                    taskList.add(new Event(
+                            parts[2].trim(), parts[3].trim(), parts[4].trim(), parts[1].trim().equals("1")
+                    ));
+                }
+            }
+            dbScanner.close();
+        } catch (FileNotFoundException e) {
+            message("File not found: " + e.getMessage());
+        }
+
         String input;
         while (true) {
             input = sc.nextLine();
@@ -158,6 +195,21 @@ public class Ginger {
                 switch (command) {
                     case BYE:
                         message("Bye. Hope to see you again soon!");
+                        try {
+                            FileWriter fw = new FileWriter("tasks.txt");
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            taskList.forEach(task -> {
+                                try {
+                                    bw.write(task.toDbString());
+                                    bw.newLine();
+                                } catch (IOException e) {
+                                    message(e.getMessage());
+                                }
+                            });
+                            bw.close();
+                        } catch (IOException e) {
+                            message(e.getMessage());
+                        }
                         sc.close();
                         return;
                     case LIST:
