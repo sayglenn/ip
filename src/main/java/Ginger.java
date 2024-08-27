@@ -5,6 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Ginger {
     private final static String HORIZONTAL_LINE = "____________________________________________________________";
@@ -80,8 +83,8 @@ public class Ginger {
     private static void addToDo(String input) throws IllegalGingerArgumentException {
         if (input.isEmpty()) {
             throw new IllegalGingerArgumentException(
-                    "Oh no! Please follow the format for the To Do: todo <title>" +
-                    "\ne.g. todo buy food"
+                    "Oh no! Please follow the format for the To Do: todo <title> " +
+                            "\ne.g. todo buy food"
             );
         }
 
@@ -95,14 +98,24 @@ public class Ginger {
         String[] deadlineParts = input.split("/by", 2);
         if (deadlineParts.length < 2) {
             throw new IllegalGingerArgumentException(
-                    "Oh no! Please follow the format for the Deadline: deadline <title> /by <time>" +
-                    "\ne.g. deadline submit work /by 8pm"
+                    "Oh no! Please follow the format for the Deadline: deadline <title> /by <time> " +
+                            "\ne.g. deadline submit work /by 1/8/2023 2000"
             );
         }
-        Deadline newDeadline = new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
-        taskList.add(newDeadline);
-        message(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
-                newDeadline, taskList.size()));
+
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            LocalDateTime deadline = LocalDateTime.parse(deadlineParts[1].trim(), formatter);
+            Deadline newDeadline = new Deadline(deadlineParts[0].trim(), deadline);
+            taskList.add(newDeadline);
+            message(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                    newDeadline, taskList.size()));
+        } catch (DateTimeParseException e) {
+            throw new IllegalGingerArgumentException(
+                    "Oh no! Your dates were incorrectly input. Please follow the format: dd/mm/yyyy HHmm" +
+                            "\ne.g. 1/8/2023 1830 or 01/08/2023 1830 will suffice."
+            );
+        }
     }
 
     private static void addEvent(String input) throws IllegalGingerArgumentException {
@@ -110,21 +123,30 @@ public class Ginger {
         if (eventParts.length < 2) {
             throw new IllegalGingerArgumentException(
                     "Oh no! Please follow the format for the Event: event <title> /from <time> /to <time>" +
-                            "\ne.g. event dinner /from 6pm /to 10pm"
+                            "\ne.g. event dinner /from 01/08/2023 6pm /to 01/08/2023 10pm"
             );
         }
         String[] timeParts = eventParts[1].split("/to", 2);
         if (timeParts.length < 2) {
             throw new IllegalGingerArgumentException(
                     "Oh no! Please follow the format for the Event: event <title> /from <time> /to <time>" +
-                            "\ne.g. event dinner /from 6pm /to 10pm"
+                            "\ne.g. event dinner /from 01/08/2023 6pm /to 01/08/2023 10pm"
             );
         }
-        Event newEvent = new Event(eventParts[0].trim(),
-                    timeParts[0].trim(), timeParts[1].trim());
-        taskList.add(newEvent);
-        message(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
-                newEvent, taskList.size()));
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            LocalDateTime start = LocalDateTime.parse(timeParts[0].trim(), formatter);
+            LocalDateTime end = LocalDateTime.parse(timeParts[1].trim(), formatter);
+            Event newEvent = new Event(eventParts[0].trim(), start, end);
+            taskList.add(newEvent);
+            message(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                    newEvent, taskList.size()));
+        } catch (DateTimeParseException e) {
+            throw new IllegalGingerArgumentException(
+                    "Oh no! Your dates were incorrectly input. Please follow the format: dd/mm/yyyy HHmm" +
+                            "\ne.g. 1/8/2023 1830 or 01/08/2023 1830 will suffice."
+            );
+        }
     }
 
     private static void deleteTask(String input) throws IllegalGingerArgumentException {
@@ -174,11 +196,11 @@ public class Ginger {
                 if (parts[0].trim().equals("T")) {
                     taskList.add(new ToDo(parts[2].trim(), parts[1].trim().equals("1")));
                 } else if (parts[0].trim().equals("D")) {
-                    taskList.add(new Deadline(parts[2].trim(), parts[3].trim(), parts[1].trim().equals("1")));
+                    taskList.add(new Deadline(parts[2].trim(),
+                            LocalDateTime.parse(parts[3].trim()), parts[1].trim().equals("1")));
                 } else {
-                    taskList.add(new Event(
-                            parts[2].trim(), parts[3].trim(), parts[4].trim(), parts[1].trim().equals("1")
-                    ));
+                    taskList.add(new Event(parts[2].trim(), LocalDateTime.parse(parts[3].trim()),
+                            LocalDateTime.parse(parts[4].trim()), parts[1].trim().equals("1")));
                 }
             }
             dbScanner.close();
