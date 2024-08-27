@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,7 +25,8 @@ public class Ginger {
             "delete - Deletes a task from the list. Usage: delete <task number>\n\n" +
             "Do note that Ginger supports date and time formatting. Please follow the convention dd/mm/yyyy HHmm\n" +
             "when entering your time! Examples: 01/08/2024 1830, 1/8/2024 1830 is also accepted.";
-    private final static ArrayList<Task> taskList = new ArrayList<>();
+    private static List<Task> taskList = new ArrayList<>();
+    private final static TaskStorage taskStorage = new TaskStorage("tasks.txt");
 
     enum Command {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, HELP, DELETE;
@@ -39,7 +41,11 @@ public class Ginger {
         }
     }
 
-    private static void message(String message) {
+    /**
+     * Displays a message from Ginger.
+     * @param message The message to be displayed to the user.
+     */
+    public static void message(String message) {
         System.out.println(HORIZONTAL_LINE + "\n" + message + "\n" + HORIZONTAL_LINE);
     }
 
@@ -177,39 +183,7 @@ public class Ginger {
 
         // Greet the user
         message(String.format("Hello! I'm %s\nHow can I spice things up for you?", BOT_NAME));
-
-        File taskFile = new File("tasks.txt");
-
-        if (!taskFile.exists()) {
-            try {
-                message("No database found! Ginger will create one now.");
-                taskFile.createNewFile();
-                message("Database created!");
-            } catch (IOException e) {
-                message(e.getMessage());
-            }
-        }
-
-
-        try {
-            Scanner dbScanner = new Scanner(taskFile);
-            while (dbScanner.hasNextLine()) {
-                String line = dbScanner.nextLine();
-                String[] parts = line.split("\\|");
-                if (parts[0].trim().equals("T")) {
-                    taskList.add(new ToDo(parts[2].trim(), parts[1].trim().equals("1")));
-                } else if (parts[0].trim().equals("D")) {
-                    taskList.add(new Deadline(parts[2].trim(),
-                            LocalDateTime.parse(parts[3].trim()), parts[1].trim().equals("1")));
-                } else {
-                    taskList.add(new Event(parts[2].trim(), LocalDateTime.parse(parts[3].trim()),
-                            LocalDateTime.parse(parts[4].trim()), parts[1].trim().equals("1")));
-                }
-            }
-            dbScanner.close();
-        } catch (FileNotFoundException e) {
-            message("File not found: " + e.getMessage());
-        }
+        taskList = taskStorage.readTasks();
 
         String input;
         while (true) {
@@ -220,21 +194,7 @@ public class Ginger {
                 switch (command) {
                     case BYE:
                         message("Bye. Hope to see you again soon!");
-                        try {
-                            FileWriter fw = new FileWriter("tasks.txt");
-                            BufferedWriter bw = new BufferedWriter(fw);
-                            taskList.forEach(task -> {
-                                try {
-                                    bw.write(task.toDbString());
-                                    bw.newLine();
-                                } catch (IOException e) {
-                                    message(e.getMessage());
-                                }
-                            });
-                            bw.close();
-                        } catch (IOException e) {
-                            message(e.getMessage());
-                        }
+                        taskStorage.saveTasks(taskList);
                         sc.close();
                         return;
                     case LIST:
