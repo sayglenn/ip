@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TaskStorage {
-    private File taskFile;
+    private final File taskFile;
 
     public TaskStorage(String filePath) {
         this.taskFile = new File(filePath);

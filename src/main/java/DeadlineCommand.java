@@ -1,8 +1,8 @@
 import java.time.LocalDateTime;
 
 public class DeadlineCommand extends Command {
-    private String title;
-    private LocalDateTime deadline;
+    private final String title;
+    private final LocalDateTime deadline;
 
     public DeadlineCommand(String title, LocalDateTime deadline) {
         this.title = title;

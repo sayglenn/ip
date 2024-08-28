@@ -1,9 +1,9 @@
 import java.time.LocalDateTime;
 
 public class EventCommand extends Command {
-    private String title;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private final String title;
+    private final LocalDateTime start;
+    private final LocalDateTime end;
 
     public EventCommand(String title, LocalDateTime start, LocalDateTime end) {
         this.title = title;

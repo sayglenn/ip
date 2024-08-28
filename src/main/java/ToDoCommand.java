@@ -1,6 +1,6 @@
 public class ToDoCommand extends Command {
 
-    private String title;
+    private final String title;
 
     public ToDoCommand(String title) {
         this.title = title;

@@ -4,4 +4,9 @@ public class ByeCommand extends Command {
         taskHandler.saveTasks();
         ui.outputMessage("Bye. Hope to see you again soon!");
     }
+
+    @Override
+    public boolean isExit() {
+        return true;
+    }
 }
