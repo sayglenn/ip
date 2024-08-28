@@ -16,10 +16,9 @@ public class TaskStorage {
 
         if (!taskFile.exists()) {
             try {
-                Ginger.message("No database found! Ginger will help you create one now!");
                 taskFile.createNewFile();
             } catch (IOException e) {
-                Ginger.message(e.getMessage());
+                System.out.println("An error occurred when creating your database.");
             }
         }
 
@@ -40,13 +39,11 @@ public class TaskStorage {
                     tasks.add(new Event(parts[2].trim(), LocalDateTime.parse(parts[3].trim()),
                             LocalDateTime.parse(parts[4].trim()), parts[1].trim().equals("1")));
                     break;
-                default:
-                    Ginger.message(String.format("No such task type %s! Continuing...", parts[0].trim()));
                 }
             }
             dbScanner.close();
         } catch (FileNotFoundException e) {
-            Ginger.message("File not found: " + e.getMessage());
+            System.out.println("File not found: " + e.getMessage());
         }
 
         return tasks;
@@ -61,12 +58,12 @@ public class TaskStorage {
                     bw.write(task.toDbString());
                     bw.newLine();
                 } catch (IOException e) {
-                    Ginger.message(e.getMessage());
+                    System.out.println("Failed to write tasks to file");
                 }
             });
             bw.close();
         } catch (IOException e) {
-            Ginger.message(e.getMessage());
+            System.out.println("Failed to write tasks to file");
         }
     }
 }
