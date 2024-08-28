@@ -1,3 +1,5 @@
+package ginger.ui;
+
 public class Ui {
     private final String HORIZONTAL_LINE = "____________________________________________________________";
     private final String BOT_NAME = "Ginger";

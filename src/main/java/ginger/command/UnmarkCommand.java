@@ -1,11 +1,20 @@
-public class MarkCommand extends Command {
+package ginger.command;
+
+import ginger.exception.IllegalGingerArgumentException;
+import ginger.task.Task;
+import ginger.task.TaskHandler;
+import ginger.ui.Ui;
+
+public class UnmarkCommand extends Command {
+
     private final int index;
 
-    public MarkCommand(int index) {
+    public UnmarkCommand(int index) {
         this.index = index;
     }
+
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui) throws IllegalGingerArgumentException {
+    public void execute(TaskHandler taskHandler, Ui ui)  throws IllegalGingerArgumentException {
         if (index < 0 || index > taskHandler.taskCount() - 1) {
             throw new IllegalGingerArgumentException(String.format("You entered an invalid task number! %s",
                     taskHandler.taskCount() == 0
@@ -13,11 +22,11 @@ public class MarkCommand extends Command {
                             : taskHandler.taskCount() == 1
                             ? "Your only task number is 1, since you only have one task."
                             : "You can enter task number from 1 - " + taskHandler.taskCount()
-                        ));
+            ));
         }
 
-        taskHandler.changeTaskStatus(index, true);
+        taskHandler.changeTaskStatus(index, false);
         Task t = taskHandler.getTask(index);
-        ui.outputMessage("Nice! I've marked this task as done:\n  " + t);
+        ui.outputMessage("OK, I've marked this task as not done yet:\n  " + t);
     }
 }

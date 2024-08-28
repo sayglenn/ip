@@ -1,3 +1,8 @@
+package ginger.command;
+
+import ginger.task.Task;
+import ginger.task.TaskHandler;
+import ginger.ui.Ui;
 import java.time.LocalDateTime;
 
 public class EventCommand extends Command {

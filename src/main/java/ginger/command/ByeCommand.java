@@ -1,3 +1,8 @@
+package ginger.command;
+
+import ginger.task.TaskHandler;
+import ginger.ui.Ui;
+
 public class ByeCommand extends Command {
     @Override
     public void execute(TaskHandler taskHandler, Ui ui) {

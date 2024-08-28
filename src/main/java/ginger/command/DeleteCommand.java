@@ -1,3 +1,10 @@
+package ginger.command;
+
+import ginger.exception.IllegalGingerArgumentException;
+import ginger.task.Task;
+import ginger.task.TaskHandler;
+import ginger.ui.Ui;
+
 public class DeleteCommand extends Command {
 
     private final int index;

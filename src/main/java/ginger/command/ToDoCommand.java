@@ -1,16 +1,19 @@
-import java.time.LocalDateTime;
+package ginger.command;
 
-public class DeadlineCommand extends Command {
+import ginger.task.Task;
+import ginger.task.TaskHandler;
+import ginger.ui.Ui;
+
+public class ToDoCommand extends Command {
+
     private final String title;
-    private final LocalDateTime deadline;
 
-    public DeadlineCommand(String title, LocalDateTime deadline) {
+    public ToDoCommand(String title) {
         this.title = title;
-        this.deadline = deadline;
     }
     @Override
     public void execute(TaskHandler taskHandler, Ui ui) {
-        Task t = taskHandler.addDeadline(this.title, this.deadline);
+        Task t = taskHandler.addToDo(this.title);
         ui.outputMessage(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
                 t, taskHandler.taskCount()));
     }

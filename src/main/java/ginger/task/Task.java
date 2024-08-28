@@ -1,5 +1,7 @@
+package ginger.task;
+
 /**
- * This abstract class encapsulates a Task which contains a title and completion.
+ * This abstract class encapsulates a ginger.task.Task which contains a title and completion.
  * @author Say Glenn
  */
 public abstract class Task {
@@ -7,7 +9,7 @@ public abstract class Task {
     private boolean isCompleted;
 
     /**
-     * Constructs a Task given title only.
+     * Constructs a ginger.task.Task given title only.
      * @param title A string which is the title of the task.
      */
     public Task(String title) {
@@ -16,7 +18,7 @@ public abstract class Task {
     }
 
     /**
-     * Constructs a Task given title and completion status.
+     * Constructs a ginger.task.Task given title and completion status.
      * @param title A string which is the title of the task.
      * @param isCompleted A boolean which shows completion status of task.
      */
