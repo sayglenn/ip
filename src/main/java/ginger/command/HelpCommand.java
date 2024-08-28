@@ -10,8 +10,8 @@ public class HelpCommand extends Command {
             "mark - Marks a task as complete. Usage: mark <task number>\n" +
             "unmark - Marks a task as incomplete. Usage: unmark <task number>\n" +
             "todo - Adds a To Do task. Usage: todo <title>\n" +
-            "deadline - Adds a ginger.task.Deadline task which includes a deadline. Usage: deadline <title> /by <time>\n" +
-            "event - Adds an ginger.task.Event task which has start and end time. Usage: event <title> /from <time> /to <time>\n" +
+            "deadline - Adds a Deadline task which includes a deadline. Usage: deadline <title> /by <time>\n" +
+            "event - Adds an Event task which has start and end time. Usage: event <title> /from <time> /to <time>\n" +
             "help - Displays this set of information again.\n" +
             "delete - Deletes a task from the list. Usage: delete <task number>\n\n" +
             "Do note that Ginger supports date and time formatting. Please follow the convention dd/mm/yyyy HHmm\n" +
