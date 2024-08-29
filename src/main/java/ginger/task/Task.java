@@ -45,4 +45,12 @@ public abstract class Task {
                 ? "[X] " + this.title
                 : "[ ] " + this.title;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Task t) {
+            return t.title.equals(this.title) && this.isCompleted == t.isCompleted;
+        }
+        return false;
+    }
 }
