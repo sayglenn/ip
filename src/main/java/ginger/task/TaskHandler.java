@@ -42,11 +42,11 @@ public class TaskHandler {
     /**
      * Changes a task status to mark or unmarked
      * @param index The index of the task that is being referenced.
-     * @param toMark A boolean to indicate whether to mark or unmark. True to mark, false to unmark.
+     * @param isCompleted A boolean to indicate whether to mark or unmark. True to mark, false to unmark.
      */
-    public void changeTaskStatus(int index, boolean toMark) {
+    public void changeTaskStatus(int index, boolean isCompleted) {
         Task t = taskList.get(index);
-        t.updateStatus(toMark);
+        t.setCompleted(isCompleted);
     }
 
     public Task addToDo(String title) {
