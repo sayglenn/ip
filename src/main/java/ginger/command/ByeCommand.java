@@ -3,6 +3,9 @@ package ginger.command;
 import ginger.task.TaskHandler;
 import ginger.ui.Ui;
 
+/**
+ * Represents a ByeCommand which saves tasks and outputs a goodbye message upon being executed.
+ */
 public class ByeCommand extends Command {
     @Override
     public void execute(TaskHandler taskHandler, Ui ui) {

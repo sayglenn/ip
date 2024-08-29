@@ -3,6 +3,10 @@ package ginger.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates an event which contains a title of the event, completion status of the event and the start and
+ * end times of the event.
+ */
 public class Event extends Task {
     private final LocalDateTime start;
     private final LocalDateTime end;

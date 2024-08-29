@@ -4,6 +4,9 @@ import ginger.task.Task;
 import ginger.task.TaskHandler;
 import ginger.ui.Ui;
 
+/**
+ * Represents a ToDoCommand which creates a to do task and outputs it when executed.
+ */
 public class ToDoCommand extends Command {
 
     private final String title;

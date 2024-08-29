@@ -7,6 +7,9 @@ import ginger.ui.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Represents the Ginger bot, which can take in user input and handle commands from the bot.
+ */
 public class Ginger {
     private final TaskHandler taskHandler;
     private final Ui ui;
@@ -16,6 +19,9 @@ public class Ginger {
         this.ui = new Ui();
     }
 
+    /**
+     * Initialises the bot for interaction with user.
+     */
     public void run() {
         ui.welcomeMessage();
         Scanner sc = new Scanner(System.in);

@@ -1,5 +1,8 @@
 package ginger.task;
 
+/**
+ * Encapsulates a to do which contains a title and completion status.
+ */
 public class ToDo extends Task {
     public ToDo(String title) {
         super(title);

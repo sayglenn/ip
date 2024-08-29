@@ -5,6 +5,9 @@ import ginger.task.TaskHandler;
 import ginger.ui.Ui;
 import java.time.LocalDateTime;
 
+/**
+ * Represents a DeadlineCommand which creates a deadline task and outputs it when executed.
+ */
 public class DeadlineCommand extends Command {
     private final String title;
     private final LocalDateTime deadline;

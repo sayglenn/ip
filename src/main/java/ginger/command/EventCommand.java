@@ -5,6 +5,9 @@ import ginger.task.TaskHandler;
 import ginger.ui.Ui;
 import java.time.LocalDateTime;
 
+/**
+ * Represents a EventCommand which creates an event task and outputs it when executed.
+ */
 public class EventCommand extends Command {
     private final String title;
     private final LocalDateTime start;
