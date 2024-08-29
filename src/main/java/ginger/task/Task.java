@@ -39,6 +39,10 @@ public abstract class Task {
         return String.format("| %s | %s |", this.isCompleted ? "1" : "0", this.title);
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
     @Override
     public String toString() {
         return isCompleted

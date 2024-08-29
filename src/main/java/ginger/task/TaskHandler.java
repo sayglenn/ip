@@ -1,7 +1,9 @@
 package ginger.task;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskHandler {
     private final List<Task> taskList;
@@ -29,6 +31,17 @@ public class TaskHandler {
     }
 
     public String tasklistToString() {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            result.append(String.format("%d. %s", i + 1, taskList.get(i)));
+            if (i != taskList.size() - 1) {
+                result.append("\n");
+            }
+        }
+        return result.toString();
+    }
+
+    public String tasklistToString(List<Task> taskList) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
             result.append(String.format("%d. %s", i + 1, taskList.get(i)));
@@ -69,5 +82,11 @@ public class TaskHandler {
 
     public void saveTasks() {
         this.taskStorage.saveTasks(this.taskList);
+    }
+
+    public List<Task> findTasks(String input) {
+        return this.taskList.stream()
+                .filter(task -> task.getTitle().contains(input))
+                .collect(Collectors.toList());
     }
 }
