@@ -3,6 +3,10 @@ package ginger.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates a deadline which will contain the title of the deadline, the completion status and the time the
+ * deadline needs to be completed by.
+ */
 public class Deadline extends Task {
     private final LocalDateTime deadline;
     public Deadline(String title, LocalDateTime deadline) {

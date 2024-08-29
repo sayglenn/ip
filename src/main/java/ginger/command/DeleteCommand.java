@@ -5,6 +5,9 @@ import ginger.task.Task;
 import ginger.task.TaskHandler;
 import ginger.ui.Ui;
 
+/**
+ * Represents a DeleteCommand which deletes a task and outputs it and the number of tasks left when executed.
+ */
 public class DeleteCommand extends Command {
 
     private final int index;

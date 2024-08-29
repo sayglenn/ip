@@ -3,6 +3,9 @@ package ginger.command;
 import ginger.task.TaskHandler;
 import ginger.ui.Ui;
 
+/**
+ * Represents a HelpCommand which displays the list of available commands when executed.
+ */
 public class HelpCommand extends Command {
     private final String helpMessage = "Here is a list of commands to get you started:\n" +
             "bye - Exits the Ginger chatbot.\n" +

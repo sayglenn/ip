@@ -5,6 +5,9 @@ import ginger.task.Task;
 import ginger.task.TaskHandler;
 import ginger.ui.Ui;
 
+/**
+ * Represents a MarkCommand which marks a task and outputs it when executed.
+ */
 public class MarkCommand extends Command {
     private final int index;
 

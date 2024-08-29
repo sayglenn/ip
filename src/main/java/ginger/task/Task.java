@@ -1,7 +1,7 @@
 package ginger.task;
 
 /**
- * This abstract class encapsulates a ginger.task.Task which contains a title and completion.
+ * Encapsulates a Task which contains a title and completion status.
  * @author Say Glenn
  */
 public abstract class Task {
@@ -29,10 +29,10 @@ public abstract class Task {
 
     /**
      * Marks the task as complete or incomplete based on the given status.
-     * @param status A boolean to indicate task completion status.
+     * @param isCompleted A boolean to indicate task completion status.
      */
-    public void updateStatus(boolean status) {
-        this.isCompleted = status;
+    public void setCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
     public String toDbString() {

@@ -5,6 +5,9 @@ import ginger.task.Task;
 import ginger.task.TaskHandler;
 import ginger.ui.Ui;
 
+/**
+ * Represents an UnmarkCommand which unmarks a task and outputs it when executed.
+ */
 public class UnmarkCommand extends Command {
 
     private final int index;

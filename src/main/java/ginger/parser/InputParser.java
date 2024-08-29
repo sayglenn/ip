@@ -8,13 +8,23 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an InputParser, which will parse the user's inputs and return the appropriate command to the user
+ * to be executed.
+ */
 public class InputParser {
     enum CommandList {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, HELP, DELETE, FIND;
 
-        public static CommandList getCommand(String command) throws IllegalGingerCommandException {
+        /**
+         * Gets the specific command based on the given input of the user.
+         * @param input The given input from the user.
+         * @return The command input by the user.
+         * @throws IllegalGingerCommandException If the command given does not match with any valid command.
+         */
+        public static CommandList getCommand(String input) throws IllegalGingerCommandException {
             try {
-                return CommandList.valueOf(command.toUpperCase());
+                return CommandList.valueOf(input.toUpperCase());
             } catch (IllegalArgumentException e) {
                 throw new IllegalGingerCommandException(
                         "Oh no! This command does not exist. Try again or enter help for a list of commands.");
@@ -22,6 +32,13 @@ public class InputParser {
         }
     }
 
+    /**
+     * Parses the input from the user and returns the appropriate command.
+     * @param input The input from the user to be parsed.
+     * @return The command given by the user.
+     * @throws IllegalGingerCommandException If the user input an unknown command.
+     * @throws IllegalGingerArgumentException If the user input incorrect arguments with the command.
+     */
     public static Command parse(String input) throws IllegalGingerCommandException, IllegalGingerArgumentException {
         String[] inputParts = input.split(" ", 2);
         CommandList givenCommand = CommandList.getCommand(inputParts[0]);
@@ -94,6 +111,12 @@ public class InputParser {
                 "Oh no! This command does not exist. Try again or enter help for a list of commands.");
     }
 
+    /**
+     * Parses a string into a number and returns the inputted number.
+     * @param input The input from the user.
+     * @return The number from the input string.
+     * @throws IllegalGingerArgumentException If the input given is not a number.
+     */
     private static int parseNumber(String input) throws IllegalGingerArgumentException {
         try {
             int number = Integer.parseInt(input);
@@ -103,6 +126,12 @@ public class InputParser {
         }
     }
 
+    /**
+     * Parses an input if determined to be an deadline and returns an DeadlineCommand.
+     * @param input The input about the deadline from the user.
+     * @return The DeadlineCommand based on user input.
+     * @throws IllegalGingerArgumentException If the deadline arguments are incorrectly formatted.
+     */
     private static Command parseDeadline(String input) throws IllegalGingerArgumentException {
         String[] deadlineParts = input.split("/by");
         if (deadlineParts.length < 2) {
@@ -121,6 +150,12 @@ public class InputParser {
         }
     }
 
+    /**
+     * Parses an input if determined to be an event and returns an EventCommand.
+     * @param input The input about the event from the user.
+     * @return The EventCommand based on user input.
+     * @throws IllegalGingerArgumentException If the event arguments are incorrectly formatted.
+     */
     private static Command parseEvent(String input) throws IllegalGingerArgumentException {
         String[] eventParts = input.split("/from");
         if (eventParts.length < 2) {

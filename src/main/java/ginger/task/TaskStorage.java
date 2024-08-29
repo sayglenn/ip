@@ -13,6 +13,10 @@ public class TaskStorage {
         this.taskFile = new File(filePath);
     }
 
+    /**
+     * Reads and parses the local database for pre-existing tasks. Creates a new database if non-existent.
+     * @return The list of tasks read from the local database.
+     */
     public List<Task> readTasks() {
         List<Task> tasks = new ArrayList<>();
 
@@ -51,6 +55,10 @@ public class TaskStorage {
         return tasks;
     }
 
+    /**
+     * Saves the task to the local database upon exit of the bot.
+     * @param taskList The list containing all tasks to be saved.
+     */
     public void saveTasks(List<Task> taskList) {
         try {
             FileWriter fw = new FileWriter("tasks.txt");

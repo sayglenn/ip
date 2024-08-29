@@ -3,6 +3,9 @@ package ginger.command;
 import ginger.task.TaskHandler;
 import ginger.ui.Ui;
 
+/**
+ * Represents a ListCommand which outputs the list of tasks when executed.
+ */
 public class ListCommand extends Command {
 
     @Override
