@@ -17,4 +17,12 @@ public class ToDoCommand extends Command {
         ui.outputMessage(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
                 t, taskHandler.taskCount()));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof ToDoCommand t) {
+            return t.title.equals(this.title);
+        }
+        return false;
+    }
 }

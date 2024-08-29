@@ -10,4 +10,9 @@ public class ListCommand extends Command {
         ui.outputMessage(String.format("Okay, here are the tasks you currently have:" +
                 "\n%s", taskHandler.tasklistToString()));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof ListCommand;
+    }
 }

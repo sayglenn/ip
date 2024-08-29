@@ -21,4 +21,9 @@ public class HelpCommand extends Command {
     public void execute(TaskHandler taskHandler, Ui ui) {
         ui.outputMessage(helpMessage);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof HelpCommand;
+    }
 }

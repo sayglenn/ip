@@ -14,4 +14,9 @@ public class ByeCommand extends Command {
     public boolean isExit() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof ByeCommand;
+    }
 }

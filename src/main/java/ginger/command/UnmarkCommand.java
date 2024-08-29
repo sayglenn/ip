@@ -29,4 +29,12 @@ public class UnmarkCommand extends Command {
         Task t = taskHandler.getTask(index);
         ui.outputMessage("OK, I've marked this task as not done yet:\n  " + t);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof UnmarkCommand u) {
+            return u.index == this.index;
+        }
+        return false;
+    }
 }

@@ -28,4 +28,12 @@ public class DeleteCommand extends Command {
         ui.outputMessage(String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.",
                     t,  taskHandler.taskCount()));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof DeleteCommand d) {
+            return d.index == this.index;
+        }
+        return false;
+    }
 }

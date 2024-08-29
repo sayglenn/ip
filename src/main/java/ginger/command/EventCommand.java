@@ -21,4 +21,12 @@ public class EventCommand extends Command {
         ui.outputMessage(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
                 t, taskHandler.taskCount()));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof EventCommand e) {
+            return e.title.equals(this.title) && e.start.equals(this.start) && e.end.equals(this.end);
+        }
+        return false;
+    }
 }

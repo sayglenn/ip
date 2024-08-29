@@ -27,4 +27,12 @@ public class MarkCommand extends Command {
         Task t = taskHandler.getTask(index);
         ui.outputMessage("Nice! I've marked this task as done:\n  " + t);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof MarkCommand m) {
+            return m.index == this.index;
+        }
+        return false;
+    }
 }
