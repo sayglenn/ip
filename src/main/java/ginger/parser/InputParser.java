@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 
 public class InputParser {
     enum CommandList {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, HELP, DELETE;
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, HELP, DELETE, FIND;
 
         public static CommandList getCommand(String command) throws IllegalGingerCommandException {
             try {
@@ -51,6 +51,13 @@ public class InputParser {
             }
             int index = parseNumber(inputParts[1].trim());
             return new UnmarkCommand(index);
+        }
+        case FIND -> {
+            if (inputParts.length < 2) {
+                throw new IllegalGingerArgumentException("Oh no! There are insufficient arguments here!\n" +
+                        "Example usage: find <task title>");
+            }
+            return new FindCommand(inputParts[1].trim());
         }
         case DELETE -> {
             if (inputParts.length < 2) {
