@@ -47,6 +47,12 @@ public class InputParserTest {
     }
 
     @Test
+    public void testInputParser_returnsFindCommandCorrectly() throws IllegalGingerCommandException,
+            IllegalGingerArgumentException {
+        assertEquals(InputParser.parse("find book"), new FindCommand("book"));
+    }
+
+    @Test
     public void testInputParser_returnsToDoCommandCorrectly() throws IllegalGingerCommandException,
             IllegalGingerArgumentException {
         assertEquals(InputParser.parse("todo buy groceries"), new ToDoCommand("buy groceries"));
