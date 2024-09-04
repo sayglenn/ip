@@ -17,7 +17,7 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui)  throws IllegalGingerArgumentException {
+    public void execute(TaskHandler taskHandler, Ui ui) throws IllegalGingerArgumentException {
         if (index < 0 || index > taskHandler.taskCount() - 1) {
             throw new IllegalGingerArgumentException(String.format("You entered an invalid task number! %s",
                     taskHandler.taskCount() == 0

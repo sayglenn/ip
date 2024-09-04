@@ -10,12 +10,26 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private final LocalDateTime start;
     private final LocalDateTime end;
+
+    /**
+     * Creates an event with a title, starting time, ending time and completion status defaulted to false.
+     * @param title The title of the event.
+     * @param start The starting time of the event.
+     * @param end The ending time of the event.
+     */
     public Event(String title, LocalDateTime start, LocalDateTime end) {
         super(title);
         this.start = start;
         this.end = end;
     }
 
+    /**
+     * Creates an event with a title, starting time, ending time and completion status. Used for loading local tasks.
+     * @param title The title of the event.
+     * @param start The starting time of the event.
+     * @param end The ending time of the event.
+     * @param isCompleted The completion status of the event.
+     */
     public Event(String title, LocalDateTime start, LocalDateTime end, boolean isCompleted) {
         super(title, isCompleted);
         this.start = start;

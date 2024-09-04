@@ -17,8 +17,8 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskHandler taskHandler, Ui ui) throws IllegalGingerArgumentException {
-        ui.outputMessage("Searching...\nHere are the matching tasks in your list:\n" +
-                taskHandler.tasklistToString(taskHandler.findTasks(this.input)));
+        ui.outputMessage("Searching...\nHere are the matching tasks in your list:\n"
+                + taskHandler.tasklistToString(taskHandler.findTasks(this.input)));
     }
 
     @Override

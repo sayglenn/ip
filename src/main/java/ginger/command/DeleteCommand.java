@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
 
         Task t = taskHandler.deleteTask(index);
         ui.outputMessage(String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.",
-                    t,  taskHandler.taskCount()));
+                    t, taskHandler.taskCount()));
     }
 
     @Override

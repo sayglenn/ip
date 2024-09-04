@@ -1,9 +1,10 @@
 package ginger.command;
 
+import java.time.LocalDateTime;
+
 import ginger.task.Task;
 import ginger.task.TaskHandler;
 import ginger.ui.Ui;
-import java.time.LocalDateTime;
 
 /**
  * Represents a DeadlineCommand which creates a deadline task and outputs it when executed.
@@ -12,6 +13,11 @@ public class DeadlineCommand extends Command {
     private final String title;
     private final LocalDateTime deadline;
 
+    /**
+     * Creates a DeadlineCommand object with a title and deadline to be executed which adds a deadline.
+     * @param title The title of the deadline.
+     * @param deadline The date and time of the deadline.
+     */
     public DeadlineCommand(String title, LocalDateTime deadline) {
         this.title = title;
         this.deadline = deadline;

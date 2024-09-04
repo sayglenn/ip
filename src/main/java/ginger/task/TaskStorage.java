@@ -1,11 +1,18 @@
 package ginger.task;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Encapsulates a TaskStorage class which reads and saves tasks to the local database.
+ */
 public class TaskStorage {
     private final File taskFile;
 
@@ -45,6 +52,8 @@ public class TaskStorage {
                     tasks.add(new Event(parts[2].trim(), LocalDateTime.parse(parts[3].trim()),
                             LocalDateTime.parse(parts[4].trim()), parts[1].trim().equals("1")));
                     break;
+                default:
+                    // Do nothing
                 }
             }
             dbScanner.close();

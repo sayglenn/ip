@@ -1,7 +1,6 @@
 package ginger.task;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +52,10 @@ public class TaskHandler {
         return taskList.remove(index);
     }
 
+    /**
+     * Converts the task list in the TaskHandler object to a string.
+     * @return The task list in a string format.
+     */
     public String tasklistToString() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
@@ -64,6 +67,11 @@ public class TaskHandler {
         return result.toString();
     }
 
+    /**
+     * Converts a given task list to a string.
+     * @param taskList The task list to be converted.
+     * @return The task list in a string format.
+     */
     public String tasklistToString(List<Task> taskList) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
@@ -128,6 +136,11 @@ public class TaskHandler {
         this.taskStorage.saveTasks(this.taskList);
     }
 
+    /**
+     * Finds tasks based on a user's given input.
+     * @param input The input given by user to match tasks with.
+     * @return The list of tasks that contain the given input.
+     */
     public List<Task> findTasks(String input) {
         return this.taskList.stream()
                 .filter(task -> task.getTitle().contains(input))

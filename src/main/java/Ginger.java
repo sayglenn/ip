@@ -1,11 +1,11 @@
+import java.util.Scanner;
+
 import ginger.command.Command;
 import ginger.exception.IllegalGingerArgumentException;
 import ginger.exception.IllegalGingerCommandException;
 import ginger.parser.InputParser;
 import ginger.task.TaskHandler;
 import ginger.ui.Ui;
-
-import java.util.Scanner;
 
 /**
  * Represents the Ginger bot, which can take in user input and handle commands from the bot.
