@@ -21,8 +21,9 @@ public class HelpCommand extends Command {
             + "when entering your time! Examples: 01/08/2024 1830, 1/8/2024 1830 is also accepted.";
 
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui) {
+    public String execute(TaskHandler taskHandler, Ui ui) {
         ui.outputMessage(helpMessage);
+        return helpMessage;
     }
 
     @Override

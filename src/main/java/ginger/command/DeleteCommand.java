@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui) throws IllegalGingerArgumentException {
+    public String execute(TaskHandler taskHandler, Ui ui) throws IllegalGingerArgumentException {
         if (index < 0 || index > taskHandler.taskCount() - 1) {
             throw new IllegalGingerArgumentException(String.format("You entered an invalid task number! %s",
                     taskHandler.taskCount() == 0
@@ -28,8 +28,10 @@ public class DeleteCommand extends Command {
         }
 
         Task t = taskHandler.deleteTask(index);
-        ui.outputMessage(String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.",
-                    t, taskHandler.taskCount()));
+        String message = String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.",
+                t, taskHandler.taskCount());
+        ui.outputMessage(message);
+        return message;
     }
 
     @Override

@@ -17,7 +17,7 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui) throws IllegalGingerArgumentException {
+    public String execute(TaskHandler taskHandler, Ui ui) throws IllegalGingerArgumentException {
         if (index < 0 || index > taskHandler.taskCount() - 1) {
             throw new IllegalGingerArgumentException(String.format("You entered an invalid task number! %s",
                     taskHandler.taskCount() == 0
@@ -30,7 +30,9 @@ public class UnmarkCommand extends Command {
 
         taskHandler.changeTaskStatus(index, false);
         Task t = taskHandler.getTask(index);
-        ui.outputMessage("OK, I've marked this task as not done yet:\n  " + t);
+        String message = "OK, I've marked this task as not done yet:\n  " + t.toString();
+        ui.outputMessage(message);
+        return message;
     }
 
     @Override

@@ -1,3 +1,5 @@
+package ginger;
+
 import java.util.Scanner;
 
 import ginger.command.Command;
@@ -14,7 +16,7 @@ public class Ginger {
     private final TaskHandler taskHandler;
     private final Ui ui;
 
-    private Ginger() {
+    public Ginger() {
         this.taskHandler = new TaskHandler();
         this.ui = new Ui();
     }
@@ -40,5 +42,17 @@ public class Ginger {
 
     public static void main(String[] args) {
         new Ginger().run();
+    }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = InputParser.parse(input);
+            return command.execute(this.taskHandler, this.ui);
+        } catch (IllegalGingerCommandException | IllegalGingerArgumentException e) {
+            return e.getMessage();
+        }
     }
 }

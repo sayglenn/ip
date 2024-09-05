@@ -8,9 +8,11 @@ import ginger.ui.Ui;
  */
 public class ByeCommand extends Command {
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui) {
+    public String execute(TaskHandler taskHandler, Ui ui) {
         taskHandler.saveTasks();
-        ui.outputMessage("Bye. Hope to see you again soon!");
+        String message = "Bye. Hope to see you again soon!";
+        ui.outputMessage(message);
+        return message;
     }
 
     @Override
