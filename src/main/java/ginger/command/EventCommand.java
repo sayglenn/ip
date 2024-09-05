@@ -26,10 +26,12 @@ public class EventCommand extends Command {
         this.end = end;
     }
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui) {
+    public String execute(TaskHandler taskHandler, Ui ui) {
         Task t = taskHandler.addEvent(this.title, this.start, this.end);
-        ui.outputMessage(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
-                t, taskHandler.taskCount()));
+        String message = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                t, taskHandler.taskCount());
+        ui.outputMessage(message);
+        return message;
     }
 
     @Override

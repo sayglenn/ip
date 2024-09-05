@@ -23,10 +23,12 @@ public class DeadlineCommand extends Command {
         this.deadline = deadline;
     }
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui) {
+    public String execute(TaskHandler taskHandler, Ui ui) {
         Task t = taskHandler.addDeadline(this.title, this.deadline);
-        ui.outputMessage(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
-                t, taskHandler.taskCount()));
+        String message = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                t, taskHandler.taskCount());
+        ui.outputMessage(message);
+        return message;
     }
 
     @Override

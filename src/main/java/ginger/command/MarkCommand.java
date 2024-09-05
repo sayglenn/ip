@@ -15,7 +15,7 @@ public class MarkCommand extends Command {
         this.index = index;
     }
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui) throws IllegalGingerArgumentException {
+    public String execute(TaskHandler taskHandler, Ui ui) throws IllegalGingerArgumentException {
         if (index < 0 || index > taskHandler.taskCount() - 1) {
             throw new IllegalGingerArgumentException(String.format("You entered an invalid task number! %s",
                     taskHandler.taskCount() == 0
@@ -28,7 +28,9 @@ public class MarkCommand extends Command {
 
         taskHandler.changeTaskStatus(index, true);
         Task t = taskHandler.getTask(index);
-        ui.outputMessage("Nice! I've marked this task as done:\n  " + t);
+        String message = "Nice! I've marked this task as done:\n  " + t.toString();
+        ui.outputMessage(message);
+        return message;
     }
 
     @Override
