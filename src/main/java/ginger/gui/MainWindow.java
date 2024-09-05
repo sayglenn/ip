@@ -34,6 +34,9 @@ public class MainWindow extends AnchorPane {
     /** Injects the Ginger instance */
     public void setGinger(Ginger g) {
         ginger = g;
+        dialogContainer.getChildren().add(
+                DialogBox.getGingerDialog("Hello! I'm Ginger. How can I spice things up for you?" , sunshineImage)
+        );
     }
 
     /**
