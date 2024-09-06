@@ -9,9 +9,10 @@ public class TaskHandlerTest {
     @Test
     public void TaskHandlerTest_TaskAddsCorrectly() {
         TaskHandler taskHandler = new TaskHandler();
+        int taskCount = taskHandler.taskCount();
 
         // Clear any potential pre-existing tasks for proper testing
-        for (int i = 0; i < taskHandler.taskCount(); i++) {
+        for (int i = 0; i < taskCount; i++) {
             taskHandler.deleteTask(0);
         }
 

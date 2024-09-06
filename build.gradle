@@ -42,7 +42,7 @@ test {
 }
 
 application {
-    mainClass.set("Ginger")
+    mainClass.set("ginger.gui.Launcher")
 }
 
 shadowJar {

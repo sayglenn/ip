@@ -16,6 +16,9 @@ public class Ginger {
     private final TaskHandler taskHandler;
     private final Ui ui;
 
+    /**
+     * Initialises a Ginger instance populates the respective taskHandler and ui fields.
+     */
     public Ginger() {
         this.taskHandler = new TaskHandler();
         this.ui = new Ui();
