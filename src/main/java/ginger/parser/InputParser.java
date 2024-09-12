@@ -54,72 +54,45 @@ public class InputParser {
         CommandList givenCommand = CommandList.getCommand(inputParts[0]);
         assert givenCommand != null;
 
-        switch (givenCommand) {
-        case BYE -> {
-            return new ByeCommand();
-        }
-        case HELP -> {
-            return new HelpCommand();
-        }
-        case LIST -> {
-            return new ListCommand();
-        }
-        case MARK -> {
-            if (inputParts.length < 2) {
-                throw new IllegalGingerArgumentException("Oh no! There are insufficient arguments here!\n"
-                        + "Example usage: mark <task number>");
-            }
-            int index = parseNumber(inputParts[1].trim());
-            return new MarkCommand(index);
-        }
-        case UNMARK -> {
-            if (inputParts.length < 2) {
-                throw new IllegalGingerArgumentException("Oh no! There are insufficient arguments here!\n"
-                        + "Example usage: unmark <task number>");
-            }
-            int index = parseNumber(inputParts[1].trim());
-            return new UnmarkCommand(index);
-        }
-        case FIND -> {
-            if (inputParts.length < 2) {
-                throw new IllegalGingerArgumentException("Oh no! There are insufficient arguments here!\n"
-                        + "Example usage: find <task title>");
-            }
-            return new FindCommand(inputParts[1].trim());
-        }
-        case DELETE -> {
-            if (inputParts.length < 2) {
-                throw new IllegalGingerArgumentException("Oh no! There are insufficient arguments here!\n"
-                        + "Example usage: delete <task number>");
-            }
-            int index = parseNumber(inputParts[1].trim());
-            return new DeleteCommand(index);
-        }
-        case TODO -> {
-            if (inputParts.length < 2) {
-                throw new IllegalGingerArgumentException("Oh no! There are insufficient arguments here!\n"
-                        + "Example usage: todo <title>");
-            }
-            return new ToDoCommand(inputParts[1].trim());
-        }
-        case DEADLINE -> {
-            if (inputParts.length < 2) {
-                throw new IllegalGingerArgumentException("Oh no! There are insufficient arguments here!\n"
-                        + "Example usage: deadline <title> /by <time>");
-            }
-            return parseDeadline(inputParts[1].trim());
-
-        }
-        case EVENT -> {
-            if (inputParts.length < 2) {
-                throw new IllegalGingerArgumentException("Oh no! There are insufficient arguments here!\n"
-                        + "Example usage: event <title> /from <time> /to <time>");
-            }
-            return parseEvent(inputParts[1].trim());
-        }
+        return switch (givenCommand) {
+        case BYE -> new ByeCommand();
+        case HELP -> new HelpCommand();
+        case LIST -> new ListCommand();
+        case MARK -> handleMark(inputParts);
+        case UNMARK -> handleUnmark(inputParts);
+        case FIND -> handleFind(inputParts);
+        case DELETE -> handleDelete(inputParts);
+        case TODO -> handleToDo(inputParts);
+        case DEADLINE -> handleDeadline(inputParts);
+        case EVENT -> handleEvent(inputParts);
         default -> throw new IllegalGingerCommandException(
                 "Oh no! This command does not exist. Try again or enter help for a list of commands.");
-        }
+        };
+    }
+
+    private static Command handleMark(String[] inputParts) throws IllegalGingerArgumentException {
+        validateArguments(inputParts, "mark <task number>");
+        return new MarkCommand(parseNumber(inputParts[1].trim()));
+    }
+
+    private static Command handleUnmark(String[] inputParts) throws IllegalGingerArgumentException {
+        validateArguments(inputParts, "unmark <task number>");
+        return new UnmarkCommand(parseNumber(inputParts[1].trim()));
+    }
+
+    private static Command handleFind(String[] inputParts) throws IllegalGingerArgumentException {
+        validateArguments(inputParts, "find <task title>");
+        return new FindCommand(inputParts[1].trim());
+    }
+
+    private static Command handleDelete(String[] inputParts) throws IllegalGingerArgumentException {
+        validateArguments(inputParts, "delete <task number>");
+        return new DeleteCommand(parseNumber(inputParts[1].trim()));
+    }
+
+    private static Command handleToDo(String[] inputParts) throws IllegalGingerArgumentException {
+        validateArguments(inputParts, "todo <title>");
+        return new ToDoCommand(inputParts[1].trim());
     }
 
     /**
@@ -139,16 +112,15 @@ public class InputParser {
 
     /**
      * Parses an input if determined to be an deadline and returns an DeadlineCommand.
-     * @param input The input about the deadline from the user.
+     * @param inputParts The input parts about the deadline from the user.
      * @return The DeadlineCommand based on user input.
      * @throws IllegalGingerArgumentException If the deadline arguments are incorrectly formatted.
      */
-    private static Command parseDeadline(String input) throws IllegalGingerArgumentException {
+    private static Command handleDeadline(String[] inputParts) throws IllegalGingerArgumentException {
+        validateArguments(inputParts, "deadline <title> /by <time>");
+        String input = inputParts[1].trim();
         String[] deadlineParts = input.split("/by");
-        if (deadlineParts.length < 2) {
-            throw new IllegalGingerArgumentException("Please follow the format of the command!\n"
-                    + "Example usage: deadline <title> /by <time>");
-        }
+        validateArguments(deadlineParts, "deadline <title> /by <time>");
 
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
@@ -163,22 +135,17 @@ public class InputParser {
 
     /**
      * Parses an input if determined to be an event and returns an EventCommand.
-     * @param input The input about the event from the user.
+     * @param inputParts The input parts about the event from the user.
      * @return The EventCommand based on user input.
      * @throws IllegalGingerArgumentException If the event arguments are incorrectly formatted.
      */
-    private static Command parseEvent(String input) throws IllegalGingerArgumentException {
+    private static Command handleEvent(String[] inputParts) throws IllegalGingerArgumentException {
+        validateArguments(inputParts, "event <title> /from <time> /to <time>");
+        String input = inputParts[1].trim();
         String[] eventParts = input.split("/from");
-        if (eventParts.length < 2) {
-            throw new IllegalGingerArgumentException("Please follow the format of the command!\n"
-                    + "Example usage: event <title> /from <time> /to <time>");
-        }
-
+        validateArguments(eventParts, "event <title> /from <time> /to <time>");
         String[] timeParts = eventParts[1].split("/to", 2);
-        if (timeParts.length < 2) {
-            throw new IllegalGingerArgumentException("Please follow the format of the command!\n"
-                    + "Example usage: event <title> /from <time> /to <time>");
-        }
+        validateArguments(timeParts, "event <title> /from <time> /to <time>");
 
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
@@ -189,6 +156,13 @@ public class InputParser {
             throw new IllegalGingerArgumentException(
                     "Oh no! Your dates were incorrectly input. Please follow the format: dd/mm/yyyy HHmm"
                             + "\nExample usage: 01/08/2023 1830");
+        }
+    }
+
+    private static void validateArguments(String[] input, String message) throws IllegalGingerArgumentException {
+        if (input.length < 2) {
+            throw new IllegalGingerArgumentException("Please follow the format of the command!\n"
+                    + "Example usage: " + message);
         }
     }
 }
