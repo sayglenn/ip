@@ -8,6 +8,8 @@ public abstract class Task {
     private final String title;
     private boolean isCompleted;
 
+    private String tag;
+
     /**
      * Constructs a ginger.task.Task given title only.
      * @param title A string which is the title of the task.
@@ -15,6 +17,7 @@ public abstract class Task {
     public Task(String title) {
         this.title = title;
         this.isCompleted = false;
+        this.tag = "";
     }
 
     /**
@@ -22,9 +25,10 @@ public abstract class Task {
      * @param title A string which is the title of the task.
      * @param isCompleted A boolean which shows completion status of task.
      */
-    public Task(String title, boolean isCompleted) {
+    public Task(String title, boolean isCompleted, String tag) {
         this.title = title;
         this.isCompleted = isCompleted;
+        this.tag = tag;
     }
 
     /**
@@ -36,18 +40,22 @@ public abstract class Task {
     }
 
     public String toDbString() {
-        return String.format("| %s | %s |", this.isCompleted ? "1" : "0", this.title);
+        return String.format("| %s | %s | %s |", this.isCompleted ? "1" : "0", this.title, this.tag);
     }
 
     public String getTitle() {
         return this.title;
     }
 
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     @Override
     public String toString() {
         return isCompleted
-                ? "[X] " + this.title
-                : "[ ] " + this.title;
+                ? String.format("[X] %s %s", this.title, this.tag)
+                : String.format("[ ] %s %s", this.title, this.tag);
     }
 
     @Override

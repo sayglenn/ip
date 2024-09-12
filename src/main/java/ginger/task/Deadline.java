@@ -25,9 +25,10 @@ public class Deadline extends Task {
      * @param title The title of the deadline.
      * @param deadline The date and time of the deadline.
      * @param isCompleted The completion status of the deadline.
+     * @param tag The tag of the deadline.
      */
-    public Deadline(String title, LocalDateTime deadline, boolean isCompleted) {
-        super(title, isCompleted);
+    public Deadline(String title, LocalDateTime deadline, boolean isCompleted, String tag) {
+        super(title, isCompleted, tag);
         this.deadline = deadline;
     }
 

@@ -13,6 +13,7 @@ import ginger.command.FindCommand;
 import ginger.command.HelpCommand;
 import ginger.command.ListCommand;
 import ginger.command.MarkCommand;
+import ginger.command.TagCommand;
 import ginger.command.ToDoCommand;
 import ginger.command.UnmarkCommand;
 import ginger.exception.IllegalGingerArgumentException;
@@ -24,7 +25,7 @@ import ginger.exception.IllegalGingerCommandException;
  */
 public class InputParser {
     enum CommandList {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, HELP, DELETE, FIND;
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, HELP, DELETE, FIND, TAG;
 
         /**
          * Gets the specific command based on the given input of the user.
@@ -65,6 +66,7 @@ public class InputParser {
         case TODO -> handleToDo(inputParts);
         case DEADLINE -> handleDeadline(inputParts);
         case EVENT -> handleEvent(inputParts);
+        case TAG -> handleTag(inputParts);
         default -> throw new IllegalGingerCommandException(
                 "Oh no! This command does not exist. Try again or enter help for a list of commands.");
         };
@@ -93,6 +95,13 @@ public class InputParser {
     private static Command handleToDo(String[] inputParts) throws IllegalGingerArgumentException {
         validateArguments(inputParts, "todo <title>");
         return new ToDoCommand(inputParts[1].trim());
+    }
+
+    private static Command handleTag(String[] inputParts) throws IllegalGingerArgumentException {
+        validateArguments(inputParts, "tag <task number> <tag name>");
+        String[] tagParts = inputParts[1].trim().split(" ", 2);
+        validateArguments(tagParts, "tag <task number> <tag name>");
+        return new TagCommand(parseNumber(tagParts[0].trim()), tagParts[1].trim());
     }
 
     /**
