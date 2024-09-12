@@ -58,14 +58,9 @@ public class TaskHandler {
      * @return The task list in a string format.
      */
     public String tasklistToString() {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
-            result.append(String.format("%d. %s", i + 1, taskList.get(i)));
-            if (i != taskList.size() - 1) {
-                result.append("\n");
-            }
-        }
-        return result.toString();
+        return this.taskList.stream()
+                .map(task -> String.format("%d. %s", taskList.indexOf(task) + 1, task))
+                .collect(Collectors.joining("\n"));
     }
 
     /**
@@ -74,14 +69,9 @@ public class TaskHandler {
      * @return The task list in a string format.
      */
     public String tasklistToString(List<Task> taskList) {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
-            result.append(String.format("%d. %s", i + 1, taskList.get(i)));
-            if (i != taskList.size() - 1) {
-                result.append("\n");
-            }
-        }
-        return result.toString();
+        return taskList.stream()
+                .map(task -> String.format("%d. %s", taskList.indexOf(task) + 1, task))
+                .collect(Collectors.joining("\n"));
     }
 
     /**
