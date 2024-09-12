@@ -52,6 +52,7 @@ public class InputParser {
     public static Command parse(String input) throws IllegalGingerCommandException, IllegalGingerArgumentException {
         String[] inputParts = input.split(" ", 2);
         CommandList givenCommand = CommandList.getCommand(inputParts[0]);
+        assert givenCommand != null;
 
         switch (givenCommand) {
         case BYE -> {
