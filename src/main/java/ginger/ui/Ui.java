@@ -4,8 +4,8 @@ package ginger.ui;
  * Represents the UI of the bot, which will display replies to the user input in the terminal.
  */
 public class Ui {
-    private final String HORIZONTAL_LINE = "____________________________________________________________";
-    private final String BOT_NAME = "Ginger";
+    private static final String HORIZONTAL_LINE = "____________________________________________________________";
+    private static final String BOT_NAME = "Ginger";
 
     /**
      * Prints the given message as a reply from the bot.

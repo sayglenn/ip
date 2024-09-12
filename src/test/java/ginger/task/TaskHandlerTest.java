@@ -1,13 +1,13 @@
 package ginger.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskHandlerTest {
 
     @Test
-    public void TaskHandlerTest_TaskAddsCorrectly() {
+    public void taskHandlerTest_taskAddsCorrectly() {
         TaskHandler taskHandler = new TaskHandler();
         int taskCount = taskHandler.taskCount();
 
