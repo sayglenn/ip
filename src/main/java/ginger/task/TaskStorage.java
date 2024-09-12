@@ -42,15 +42,15 @@ public class TaskStorage {
                 String[] parts = line.split("\\|");
                 switch (parts[0].trim()) {
                 case "T":
-                    tasks.add(new ToDo(parts[2].trim(), parts[1].trim().equals("1")));
+                    tasks.add(new ToDo(parts[2].trim(), parts[1].trim().equals("1"), parts[3].trim()));
                     break;
                 case "D":
                     tasks.add(new Deadline(parts[2].trim(),
-                            LocalDateTime.parse(parts[3].trim()), parts[1].trim().equals("1")));
+                            LocalDateTime.parse(parts[4].trim()), parts[1].trim().equals("1"), parts[3].trim()));
                     break;
                 case "E":
-                    tasks.add(new Event(parts[2].trim(), LocalDateTime.parse(parts[3].trim()),
-                            LocalDateTime.parse(parts[4].trim()), parts[1].trim().equals("1")));
+                    tasks.add(new Event(parts[2].trim(), LocalDateTime.parse(parts[4].trim()),
+                            LocalDateTime.parse(parts[5].trim()), parts[1].trim().equals("1"), parts[3].trim()));
                     break;
                 default:
                     // Do nothing
