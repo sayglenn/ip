@@ -18,6 +18,7 @@ public class TaskHandler {
     public TaskHandler() {
         this.taskStorage = new TaskStorage("tasks.txt");
         this.taskList = this.taskStorage.readTasks();
+        assert this.taskList != null;
     }
 
     /**
@@ -90,6 +91,7 @@ public class TaskHandler {
      */
     public void changeTaskStatus(int index, boolean isCompleted) {
         Task t = taskList.get(index);
+        assert t != null;
         t.setCompleted(isCompleted);
     }
 
@@ -101,6 +103,7 @@ public class TaskHandler {
     public Task addToDo(String title) {
         ToDo newToDo = new ToDo(title);
         this.addTask(newToDo);
+        assert !this.taskList.isEmpty();
         return newToDo;
     }
 
@@ -113,6 +116,7 @@ public class TaskHandler {
     public Task addDeadline(String title, LocalDateTime deadline) {
         Deadline newDeadline = new Deadline(title, deadline);
         this.addTask(newDeadline);
+        assert !this.taskList.isEmpty();
         return newDeadline;
     }
 
@@ -126,6 +130,7 @@ public class TaskHandler {
     public Task addEvent(String title, LocalDateTime start, LocalDateTime end) {
         Event newEvent = new Event(title, start, end);
         this.addTask(newEvent);
+        assert !this.taskList.isEmpty();
         return newEvent;
     }
 

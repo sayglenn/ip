@@ -1,12 +1,23 @@
 package ginger.parser;
 
-import ginger.command.*;
-import ginger.exception.IllegalGingerArgumentException;
-import ginger.exception.IllegalGingerCommandException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import ginger.command.ByeCommand;
+import ginger.command.DeadlineCommand;
+import ginger.command.DeleteCommand;
+import ginger.command.EventCommand;
+import ginger.command.FindCommand;
+import ginger.command.HelpCommand;
+import ginger.command.ListCommand;
+import ginger.command.MarkCommand;
+import ginger.command.ToDoCommand;
+import ginger.command.UnmarkCommand;
+import ginger.exception.IllegalGingerArgumentException;
+import ginger.exception.IllegalGingerCommandException;
 
 public class InputParserTest {
 
