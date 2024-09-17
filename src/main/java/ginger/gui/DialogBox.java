@@ -40,13 +40,18 @@ public class DialogBox extends HBox {
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * @param reply The reply that Ginger provides.
      */
-    private void flip() {
+    private void flip(String reply) {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        dialog.getStyleClass().add("reply-label");
+        if (reply.contains("Oh no!")) {
+            dialog.getStyleClass().add("error-label");
+        } else {
+            dialog.getStyleClass().add("reply-label");
+        }
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
@@ -55,7 +60,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getGingerDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.flip(text);
         return db;
     }
 }
