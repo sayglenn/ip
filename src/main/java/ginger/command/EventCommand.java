@@ -28,8 +28,8 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskHandler taskHandler, Ui ui) {
         Task t = taskHandler.addEvent(this.title, this.start, this.end);
-        String message = String.format("Spicing up your life! I've added this event:\n  %s\n" +
-                        "Now you have %d tasks in the list.",
+        String message = String.format("Spicing up your life! I've added this event:\n  %s\n"
+                        + "Now you have %d tasks in the list.",
                 t, taskHandler.taskCount());
         taskHandler.saveTasks();
         ui.outputMessage(message);
