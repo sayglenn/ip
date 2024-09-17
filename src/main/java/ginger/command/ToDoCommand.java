@@ -17,6 +17,7 @@ public class ToDoCommand extends Command {
     @Override
     public String execute(TaskHandler taskHandler, Ui ui) {
         Task t = taskHandler.addToDo(this.title);
+        taskHandler.saveTasks();
         String message = String.format("Sprinkling heat in! I've added this to do:\n  %s\n" +
                         "Now you have %d tasks in the list.",
                 t, taskHandler.taskCount());

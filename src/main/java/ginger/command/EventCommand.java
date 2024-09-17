@@ -31,6 +31,7 @@ public class EventCommand extends Command {
         String message = String.format("Spicing up your life! I've added this event:\n  %s\n" +
                         "Now you have %d tasks in the list.",
                 t, taskHandler.taskCount());
+        taskHandler.saveTasks();
         ui.outputMessage(message);
         return message;
     }

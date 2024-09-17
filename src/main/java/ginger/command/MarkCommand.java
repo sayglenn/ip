@@ -28,6 +28,7 @@ public class MarkCommand extends Command {
 
         taskHandler.changeTaskStatus(index, true);
         Task t = taskHandler.getTask(index);
+        taskHandler.saveTasks();
         String message = "Consider it seasoned! I've marked this task as done:\n  " + t.toString();
         ui.outputMessage(message);
         return message;

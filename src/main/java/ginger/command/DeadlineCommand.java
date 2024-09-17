@@ -28,6 +28,7 @@ public class DeadlineCommand extends Command {
         String message = String.format("Spicy choice! I've added this deadline:\n  %s\n" +
                         "Now you have %d tasks in the list.",
                 t, taskHandler.taskCount());
+        taskHandler.saveTasks();
         ui.outputMessage(message);
         return message;
     }

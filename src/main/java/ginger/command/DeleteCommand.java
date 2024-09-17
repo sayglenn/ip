@@ -31,6 +31,7 @@ public class DeleteCommand extends Command {
         String message = String.format("Unseasoning! I've removed this task:\n  %s\n" +
                         "Now you have %d tasks in the list.",
                 t, taskHandler.taskCount());
+        taskHandler.saveTasks();
         ui.outputMessage(message);
         return message;
     }

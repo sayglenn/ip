@@ -30,6 +30,7 @@ public class UnmarkCommand extends Command {
 
         taskHandler.changeTaskStatus(index, false);
         Task t = taskHandler.getTask(index);
+        taskHandler.saveTasks();
         String message = "Consider it seasoned! I've marked this task as not done yet:\n  " + t.toString();
         ui.outputMessage(message);
         return message;

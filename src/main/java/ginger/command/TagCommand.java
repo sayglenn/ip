@@ -37,6 +37,7 @@ public class TagCommand extends Command {
 
         Task t = taskHandler.getTask(index);
         t.setTag(tag);
+        taskHandler.saveTasks();
         String message = "Okay, I've added the tag to this task: " + t;
         ui.outputMessage(message);
         return message;
