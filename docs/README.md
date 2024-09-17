@@ -6,7 +6,7 @@ Ginger is a chatbot that allows you to record and track your tasks. It provides 
 
 ## Step-by-step Download Guide
 1. Ensure you have Java 17 or above installed.
-2. Download the latest .jar file from [here.]()
+2. Download the latest .jar file from [here.](https://github.com/sayglenn/ip/releases/tag/A-Release)
 3. Move the file to an empty folder.
 4. Use a command terminal and `cd` into the folder the jar file is in. 
 5. Run`java -jar ginger.jar` to run the application.
@@ -33,8 +33,8 @@ General Usage:
 - `deadline (title) /by (time)`: Creates a deadline task with a title and deadline associated with it.
 
 Examples:
-- `deadline assignment 1 /by 21/09/2024 23:59`
-- `deadline submit report /by 23/09/2024 14:00`
+- `deadline assignment 1 /by 21/09/2024 2359`
+- `deadline submit report /by 23/09/2024 1400`
 
 #### Event
 An Event is described as a task with a duration associated with it, such as a dinner or meetup.
@@ -43,8 +43,8 @@ General Usage:
 - `event (title) /from (time) /to (time)`: Creates an event with a title and duration associated with it.
 
 Examples:
-- `event lunch /from 20/09/2024 12:00 /to 20/09/2024 13:00`
-- `event networking /from 22/09/2024 20:00 /to 22/09/2024 22:00`
+- `event lunch /from 20/09/2024 1200 /to 20/09/2024 1300`
+- `event networking /from 22/09/2024 2000 /to 22/09/2024 2200`
 
 ### Mark / Unmark Tasks
 A task can be marked or unmarked to show its completion status, which is useful to track which tasks have been finished or not.
