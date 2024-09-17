@@ -31,7 +31,7 @@ public class TaskStorage {
             try {
                 taskFile.createNewFile();
             } catch (IOException e) {
-                System.out.println("An error occurred when creating your database.");
+                System.out.println("Looks like we overcooked that one... An error occurred creating your database.");
             }
         }
 
@@ -77,12 +77,12 @@ public class TaskStorage {
                     bw.write(task.toDbString());
                     bw.newLine();
                 } catch (IOException e) {
-                    System.out.println("Failed to write tasks to file");
+                    System.out.println("Looks like we overcooked that one... Failed to write tasks to file");
                 }
             });
             bw.close();
         } catch (IOException e) {
-            System.out.println("Failed to write tasks to file");
+            System.out.println("Looks like we overcooked that one... Failed to write tasks to file");
         }
     }
 }

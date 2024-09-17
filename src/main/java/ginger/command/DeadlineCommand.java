@@ -25,7 +25,8 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskHandler taskHandler, Ui ui) {
         Task t = taskHandler.addDeadline(this.title, this.deadline);
-        String message = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+        String message = String.format("Spicy choice! I've added this deadline:\n  %s\n" +
+                        "Now you have %d tasks in the list.",
                 t, taskHandler.taskCount());
         ui.outputMessage(message);
         return message;

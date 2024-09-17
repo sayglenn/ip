@@ -10,7 +10,7 @@ public class ByeCommand extends Command {
     @Override
     public String execute(TaskHandler taskHandler, Ui ui) {
         taskHandler.saveTasks();
-        String message = "Bye. Hope to see you again soon!";
+        String message = "Bye. Hope to sprinkle more help in your life!";
         ui.outputMessage(message);
         return message;
     }
