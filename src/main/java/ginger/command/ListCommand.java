@@ -11,7 +11,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskHandler taskHandler, Ui ui) {
         String message = String.format("Okay, here are the tasks you currently have:"
-                + "\n%s", taskHandler.tasklistToString());
+                + "\n%s", taskHandler.taskListToString());
         ui.outputMessage(message);
         return message;
     }

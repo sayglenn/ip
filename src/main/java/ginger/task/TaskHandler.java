@@ -58,7 +58,7 @@ public class TaskHandler {
      * Converts the task list in the TaskHandler object to a string.
      * @return The task list in a string format.
      */
-    public String tasklistToString() {
+    public String taskListToString() {
         return IntStream.range(0, this.taskList.size())
                 .mapToObj(i -> String.format("%d. %s", i + 1, this.taskList.get(i)))
                 .collect(Collectors.joining("\n"));
@@ -69,7 +69,7 @@ public class TaskHandler {
      * @param taskList The task list to be converted.
      * @return The task list in a string format.
      */
-    public String tasklistToString(List<Task> taskList) {
+    public String taskListToString(List<Task> taskList) {
         return IntStream.range(0, taskList.size())
                 .mapToObj(i -> String.format("%d. %s", i + 1, taskList.get(i)))
                 .collect(Collectors.joining("\n"));

@@ -68,7 +68,7 @@ public class TaskHandlerTest {
         taskHandler.addTask(t1);
         taskHandler.addTask(t2);
 
-        assertEquals(taskHandler.tasklistToString(), "1. [T][ ] play games \n"
+        assertEquals(taskHandler.taskListToString(), "1. [T][ ] play games \n"
                 + "2. [D][ ] buy present  (due: 20 Oct 2024, 12:00)");
 
     }
