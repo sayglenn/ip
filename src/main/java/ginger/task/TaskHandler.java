@@ -3,6 +3,7 @@ package ginger.task;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Encapsulates a task handler, which contains the list of tasks and local database of task. The task handler will
@@ -58,8 +59,8 @@ public class TaskHandler {
      * @return The task list in a string format.
      */
     public String tasklistToString() {
-        return this.taskList.stream()
-                .map(task -> String.format("%d. %s", taskList.indexOf(task) + 1, task))
+        return IntStream.range(0, this.taskList.size())
+                .mapToObj(i -> String.format("%d. %s", i + 1, this.taskList.get(i)))
                 .collect(Collectors.joining("\n"));
     }
 
@@ -69,8 +70,8 @@ public class TaskHandler {
      * @return The task list in a string format.
      */
     public String tasklistToString(List<Task> taskList) {
-        return taskList.stream()
-                .map(task -> String.format("%d. %s", taskList.indexOf(task) + 1, task))
+        return IntStream.range(0, taskList.size())
+                .mapToObj(i -> String.format("%d. %s", i + 1, taskList.get(i)))
                 .collect(Collectors.joining("\n"));
     }
 

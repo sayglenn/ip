@@ -53,7 +53,7 @@ public class TaskStorage {
                             LocalDateTime.parse(parts[5].trim()), parts[1].trim().equals("1"), parts[3].trim()));
                     break;
                 default:
-                    // Do nothing
+                    // Do nothing as the current task was badly written, don't need to input it in.
                 }
             }
             dbScanner.close();

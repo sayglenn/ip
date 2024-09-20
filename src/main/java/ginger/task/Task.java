@@ -54,8 +54,8 @@ public abstract class Task {
     @Override
     public String toString() {
         return isCompleted
-                ? String.format("[X] %s %s", this.title, this.tag)
-                : String.format("[ ] %s %s", this.title, this.tag);
+                ? String.format("[X] %s %s", this.title, this.tag.isEmpty() ? "" : "[" + this.tag + "]")
+                : String.format("[ ] %s %s", this.title, this.tag.isEmpty() ? "" : "[" + this.tag + "]");
     }
 
     @Override

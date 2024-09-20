@@ -94,6 +94,8 @@ public class InputParser {
 
     private static Command handleToDo(String[] inputParts) throws IllegalGingerArgumentException {
         validateArguments(inputParts, "todo <title>");
+        System.out.println(String.format("Argument: %s", inputParts[1].trim()));
+        System.out.println(inputParts[1].trim().isEmpty());
         return new ToDoCommand(inputParts[1].trim());
     }
 
@@ -168,9 +170,16 @@ public class InputParser {
         }
     }
 
+    /**
+     * Checks if the number of inputs is less than 2 or if the second input is empty upon being split. This prevents
+     * empty titles or empty dates from being input together with the command.
+     * @param input The inputs of the array after splitting.
+     * @param message The error message to be thrown.
+     * @throws IllegalGingerArgumentException If the arguments are not properly formatted
+     */
     private static void validateArguments(String[] input, String message) throws IllegalGingerArgumentException {
-        if (input.length < 2) {
-            throw new IllegalGingerArgumentException("Please follow the format of the command!\n"
+        if (input.length < 2 || input[1].trim().isEmpty()) {
+            throw new IllegalGingerArgumentException("Oh no! Please follow the format of the command!\n"
                     + "Example usage: " + message);
         }
     }
