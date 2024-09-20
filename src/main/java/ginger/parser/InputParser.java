@@ -178,7 +178,7 @@ public class InputParser {
      * @throws IllegalGingerArgumentException If the arguments are not properly formatted
      */
     private static void validateArguments(String[] input, String message) throws IllegalGingerArgumentException {
-        if (input.length < 2 || input[1].trim().isEmpty()) {
+        if (input.length < 2 || input[1].trim().isEmpty() || input[0].trim().isEmpty()) {
             throw new IllegalGingerArgumentException("Oh no! Please follow the format of the command!\n"
                     + "Example usage: " + message);
         }
