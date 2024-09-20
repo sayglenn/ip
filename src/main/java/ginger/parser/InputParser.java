@@ -94,8 +94,6 @@ public class InputParser {
 
     private static Command handleToDo(String[] inputParts) throws IllegalGingerArgumentException {
         validateArguments(inputParts, "todo <title>");
-        System.out.println(String.format("Argument: %s", inputParts[1].trim()));
-        System.out.println(inputParts[1].trim().isEmpty());
         return new ToDoCommand(inputParts[1].trim());
     }
 
@@ -122,7 +120,7 @@ public class InputParser {
     }
 
     /**
-     * Parses an input if determined to be an deadline and returns an DeadlineCommand.
+     * Parses an input if determined to be a deadline and returns an DeadlineCommand.
      * @param inputParts The input parts about the deadline from the user.
      * @return The DeadlineCommand based on user input.
      * @throws IllegalGingerArgumentException If the deadline arguments are incorrectly formatted.

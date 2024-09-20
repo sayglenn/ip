@@ -22,6 +22,16 @@ import ginger.exception.IllegalGingerCommandException;
 public class InputParserTest {
 
     @Test
+    public void testInputParser_unknownCommand_exceptionThrown() throws IllegalGingerArgumentException {
+        try {
+            InputParser.parse("create art");
+        } catch (IllegalGingerCommandException e) {
+            assertEquals(e.getMessage(), "Oh no! This command does not exist. "
+                    + "Try again or enter help for a list of commands.");
+        }
+    }
+
+    @Test
     public void testInputParser_returnsByeCommandCorrectly() throws IllegalGingerCommandException,
             IllegalGingerArgumentException {
         assertEquals(InputParser.parse("bye"), new ByeCommand());
@@ -70,11 +80,31 @@ public class InputParserTest {
     }
 
     @Test
+    public void testInputParser_toDoMissingTitle_exceptionThrown() throws IllegalGingerCommandException {
+        try {
+            InputParser.parse("todo");
+        } catch (IllegalGingerArgumentException e) {
+            assertEquals(e.getMessage(), "Oh no! Please follow the format of the command!\n"
+                    + "Example usage: todo <title>");
+        }
+    }
+
+    @Test
     public void testInputParser_returnsDeadlineCommandCorrectly() throws IllegalGingerCommandException,
             IllegalGingerArgumentException {
         assertEquals(InputParser.parse("deadline assignment /by 20/08/2024 2100"),
                 new DeadlineCommand("assignment",
                         LocalDateTime.of(2024, 8, 20, 21, 0)));
+    }
+
+    @Test
+    public void testInputParser_deadlineMissingTime_exceptionThrown() throws IllegalGingerCommandException {
+        try {
+            InputParser.parse("deadline assignment /by");
+        } catch (IllegalGingerArgumentException e) {
+            assertEquals(e.getMessage(), "Oh no! Please follow the format of the command!\n"
+                    + "Example usage: deadline <title> /by <time>");
+        }
     }
 
     @Test
@@ -84,5 +114,25 @@ public class InputParserTest {
                 new EventCommand("dinner",
                         LocalDateTime.of(2024, 10, 10, 18, 0),
                         LocalDateTime.of(2024, 10, 10, 20, 0)));
+    }
+
+    @Test
+    public void testInputParser_eventMissingTitle_exceptionThrown() throws IllegalGingerCommandException {
+        try {
+            InputParser.parse("event /from 12/12/2024 1800 /to 12/12/2024 2100");
+        } catch (IllegalGingerArgumentException e) {
+            assertEquals(e.getMessage(), "Oh no! Please follow the format of the command!\n"
+                    + "Example usage: event <title> /from <time> /to <time>");
+        }
+    }
+
+    @Test
+    public void testInputParser_eventMissingStartTime_exceptionThrown() throws IllegalGingerCommandException {
+        try {
+            InputParser.parse("event dinner /from /to 12/12/2024 2100");
+        } catch (IllegalGingerArgumentException e) {
+            assertEquals(e.getMessage(), "Oh no! Please follow the format of the command!\n"
+                    + "Example usage: event <title> /from <time> /to <time>");
+        }
     }
 }
